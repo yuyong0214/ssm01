@@ -2,8 +2,16 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yong.mapper.UserMapper">	
+    <!-- 添加用户 由于主键自增所以这边没有添加主键信息 -->
+    <insert id="saveUser">
+    	insert into tb_user(userName,userAge)
+    	values (#{userName},#{userAge})
+    </insert>
 	<!--  查询单条记录  -->  
     <select id="selectUserById" parameterType="int" resultType="com.yong.model.User">  
        select * from tb_user where userId = #{userId}  
-    </select>  
+    </select>
+    <select id="query" resultType="com.yong.model.User">
+    	select * from tb_user
+    </select>
 </mapper>

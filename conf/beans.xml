@@ -13,21 +13,17 @@
 		<property name="username" value="root" />
 		<property name="password" value="" />
 	</bean>
-
-
+	
+	<!-- 配置SqlSessionFactoryBean -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
+		<!-- 加载MyBatis配置文件路径 -->
 		<property name="configLocation" value="classpath:MyBatisConf.xml" />
-		<!-- <property name="typeAliasesPackage" value="com.tiantian.ckeditor.model" 
-			/> -->
 	</bean>
 
-	  <bean id="userMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">  
-       <property name="mapperInterface"  
-           value="com.yong.mapper.UserMapper" />  
+	<!-- 配置MapperFactoryBean -->
+	<bean id="userMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">  
+       <property name="mapperInterface" value="com.yong.mapper.UserMapper" />  
        <property name="sqlSessionFactory" ref="sqlSessionFactory" />  
     </bean> 
-	<!-- 自动扫描注解的bean -->
-	<context:component-scan base-package="com.yong" />
-    
 </beans>

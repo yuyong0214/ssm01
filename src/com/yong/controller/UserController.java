@@ -1,6 +1,8 @@
 
 package com.yong.controller;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
@@ -18,7 +20,24 @@ public class UserController
     @Resource
     private UserService userService;
 
-    private User user;
+    @RequestMapping("/")
+    public String getIndex()
+    {
+        return "index";
+    }
+
+    /**
+     * 方法描述：添加用户信息页面
+     * 
+     * @author YUY
+     * @创建时间：2017年9月12日 上午10:12:59
+     * @return
+     */
+    @RequestMapping("/add")
+    public String addUserUI()
+    {
+        return "add";
+    }
 
     @RequestMapping(value = "/findUser", method = RequestMethod.POST)
     public String getUserById(HttpServletRequest request, Model model)
@@ -29,20 +48,18 @@ public class UserController
         return "findUser";
     }
 
-    @RequestMapping("/")
-    public String getIndex()
+    @RequestMapping(value = "/addUser", method = RequestMethod.POST)
+    public String addUser(User user, Model model)
     {
-        return "index";
+        this.userService.save(user);
+        return "listUser";
     }
 
-    public User getUser()
+    @RequestMapping("/list")
+    public String findUsers(Model model)
     {
-        return user;
+        List<User> list = userService.query();
+        model.addAttribute("users", list);
+        return "listUser";
     }
-
-    public void setUser(User user)
-    {
-        this.user = user;
-    }
-
 }

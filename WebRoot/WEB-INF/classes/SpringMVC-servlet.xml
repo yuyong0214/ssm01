@@ -12,14 +12,14 @@
         http://www.springframework.org/schema/context   
         http://www.springframework.org/schema/context/spring-context-3.2.xsd">
 
+	<!-- springmvc 注解驱动 -->
 	<mvc:annotation-driven/> 
-
-	<!-- 把标记了@Controller注解的类转换为bean -->
+	
+	<!-- 自动扫描注解的bean -->
 	<context:component-scan base-package="com.yong" />
-
+	
 	<!-- 对模型视图名称的解析，即在模型视图名称添加前后缀 -->
-	<bean
-		class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"
 		p:prefix="/WEB-INF/views/" p:suffix=".jsp" />
 
 
